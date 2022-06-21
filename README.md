@@ -24,4 +24,4 @@ When the page loads, Goose will insert your component into that container, and v
 
 ## Further information
 
-An extended demo can be found in the `index.html` file.
+An extended demo can be found in the `index.html` file.  It should be run on a local web server, I recommend using the NodeJS `http-server` package as a simple means to do so.
