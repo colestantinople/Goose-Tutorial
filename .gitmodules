@@ -1,0 +1,3 @@
+[submodule "Goose"]
+	path = Goose
+	url = https://github.com/colestantinople/Goose.git
