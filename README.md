@@ -1,27 +1,14 @@
-# Goose
+![image](https://user-images.githubusercontent.com/37753525/174711190-570c82de-8e6a-4f51-817f-9116738fc1e9.png)
+
+# Goose-Tutorial
 
 Goose is a super basic tool for creating web components on a website.
 
 By allowing the developer to define their own HTML/CSS/JS components in a single place, Goose encourages 
 adherence to the Don't Repeat Yourself (DRY) principle without any JavaScript knowledge required.
 
-## Setup
+This repository demonstrates the functionality of Goose.
 
-The process of using Goose is simple:
- 1. Add the Goose folder in the root of your website folder
- 2. Add the below code to your `<head>` element:
-```html
-<div class="code center-code">
-  <script src="Goose/_private/load.js" type="module"></script>
-</div>
-```
- 3. That's it!
-  
-## Using Goose Components
- 
-To use a Goose component, all you have to do is write it into your HTML like any other element.
-When the page loads, Goose will insert your component into that container, and voila, you have a component!
+## How to download Goose and begin using it.
 
-## Further information
-
-An extended demo can be found in the `index.html` file.
+Simply clone [Goose](https://github.com/colestantinople/Goose) into the root of your web project and follow the instructions in its `readme.md` file.
