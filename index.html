@@ -1,10 +1,17 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
 <head>
   <link href="demo-resources/index.css" rel="stylesheet">
   </link>
+  <title>Goose Web Components</title>
   <script src="Goose/_private/load.js" type="module"></script>
+  <script src="Goose/_private/smoothener.js"></script>
 </head>
 
 <body>
+  <goose-nav></goose-nav>
   <div id="content">
     <img id="goose-image" src="demo-resources/goose-header.png" alt="">
     <h1>Welcome to Goose</h1>
@@ -108,14 +115,64 @@
       &lt;/goose-button>
     </div>
 
+    <h3><code>&lt;goose-slot&gt;</code> and <code>&lt;goose-insert&gt;</code></h3>
+
+    <p>
+      Sometimes you need to be able to insert HTML into multiple places in a component. <code>&lt;goose-slot&gt;</code>
+      provides an easy way to accomplish this. Consider the template <code>goose-slot-machine.html</code>:
+    </p>
+
+    <div class="code center-code">
+      &lt;div class="goose-slot-machine-template"><br />
+      &nbsp;&nbsp;&lt;div><br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;goose-slot data-slot-id="left">&lt;/goose-slot><br />
+      &nbsp;&nbsp;&lt;/div><br />
+      &nbsp;&nbsp;&lt;goose-slot data-slot-id="mid">&lt;/goose-slot><br />
+      &nbsp;&nbsp;&lt;div><br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;goose-slot data-slot-id="right">&lt;/goose-slot><br />
+      &nbsp;&nbsp;&lt;/div><br />
+      &lt;/div>
+    </div>
+
+    <p>
+      We can then replace each of these <code>&lt;goose-slot&gt;</code>s with our own code, by calling
+      <code>&lt;goose-slot-machine&gt;</code> as
+    </p>
+
+    <div class="code center-code">
+      &lt;goose-slot-machine><br />
+      &nbsp;&nbsp;&lt;goose-insert data-slot-id="left">Left text&lt;/goose-slot><br />
+      &nbsp;&nbsp;&lt;goose-insert data-slot-id="mid">&lt;b> MIDDLE TEXT &lt;/b>&lt;/goose-slot><br />
+      &nbsp;&nbsp;&lt;goose-insert data-slot-id="right">right text&lt;/goose-slot><br />
+      &lt;/goose-slot-machine>
+    </div>
+
+    <p>
+      Then, the <code>&lt;goose-slot&gt;</code>s will be overwritten with their corresponding
+      <code>&lt;goose-insert&gt;</code>s at runtime, resulting in the final HTML output:
+    </p>
+
+    <div class="code center-code">
+      &lt;div class="goose-slot-machine-template"><br />
+      &nbsp;&nbsp;&lt;div><br />
+      &nbsp;&nbsp;&nbsp;&nbsp;Left text<br />
+      &nbsp;&nbsp;&lt;/div><br />
+      &nbsp;&nbsp;&lt;b> MIDDLE TEXT &lt;/b><br />
+      &nbsp;&nbsp;&lt;div><br />
+      &nbsp;&nbsp;&nbsp;&nbsp;right text<br />
+      &nbsp;&nbsp;&lt;/div><br />
+      &lt;/div>
+    </div>
+
     <h3><span class="code">data-goose-</span> and <span class="code">goose-insert-</span></h3>
 
-    <p> Sometimes we need to pass in information to a component. For example, the <span class="code">goose-button</span>
+    <p> Sometimes we need to pass in information to a component; specifically, information that isn't
+      an HTML element. For example, the <span class="code">goose-button</span>
       would benefit from having background colour and text colour parameters to allow customization. </p>
 
     <p>Goose allows for this by having the parameters defined in the Goose element as <span
         class="code">data-goose-</span> attributes,
-      and in the component's HTML file as <span class="code">goose-insert-</span>.</p>
+      and in the component's HTML file as <span class="code">goose-insert-</span> attributes.</p>
 
     <p>This is best demonstrated by example. Here is some code for a <span class="code">goose-button</span>:</p>
     <div class="code center-code">
@@ -187,6 +244,61 @@
       </li>
     </ol>
 
+    <h1><code>goose-config.json</code></h1>
+
+    <p>
+      Within the Goose folder is <code>goose-config.json</code>, a file that allows the developer to configure how Goose
+      operates.
+    </p>
+
+    <p>
+      Here is a full wiki of its attributes:
+    </p>
+
+    <h2><code>prefix</code></h2>
+
+    <p>
+      Default: <code>"goose"</code>
+    </p>
+
+    <p>
+      Change this to change the prefix Goose uses to find attributes, elements, and components. Note that you will have
+      to rename any existing web components to your new prefix.
+    </p>
+    <p>
+      Items that must remain named Goose:
+    </p>
+    <ul>
+      <li><code>goose-config.json</code></li>
+      <li>The Goose folder</li>
+    </ul>
+
+    <h2><code>resources</code></h2>
+
+    <p>
+      Use this to tell Goose what resources it should try to load for each component. Neglecting this may cause your
+      developer console to have <i>a lot</i> of network errors.
+    </p>
+
+    <p>
+      Please follow the pattern pre-established in the base <code>goose-config.json</code>.
+    </p>
+
+    <h2><code>show_structure</code></h2>
+
+    <p>
+      Default: <code>false</code>
+    </p>
+
+    <p>
+      Set this to <code>true</code> to tell Goose to generate HTML output with the web component tags kept in the final
+      output. This can clutter the output HTML, but also provide more context on how that HTML is generated.
+    </p>
+
+    <p>
+      Note that changing this setting can lead to slight layout changes, although it will not cause any major shifts.
+    </p>
+
     <h1>Troubleshooting</h1>
 
     <h3>I don't want my components to be called <span class="code">goose-</span></h3>
@@ -218,3 +330,5 @@
     <span>Thank Mr. Goose</span>
   </div>
 </body>
+
+</html>
